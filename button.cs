@@ -34,8 +34,8 @@ namespace MouselessCommander {
 
 				Curses.addstr ("{0,-6}", labels [i]);
 
-	        for (int x = 2 + labels[i].Length; x < width; x++)
-				Curses.addch(' ');
+				for (int x = 2 + labels[i].Length; x < width; x++)
+					Curses.addch(' ');
 				
 			}
 		}
