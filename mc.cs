@@ -122,7 +122,7 @@ namespace MouselessCommander {
 		{
 			base.DoSizeChanged ();
 			entry.y = Application.Lines-2;
-			entry.w = Application.Cols - prompt.Text.Length;
+			entry.Width = Application.Cols - prompt.Text.Length;
 		}
 
 		void SetupGUI ()

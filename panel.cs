@@ -424,15 +424,15 @@ namespace MouselessCommander {
 			base.DoSizeChanged ();
 
 			if (x == 0){
-				w = Application.Cols/2;
+				Width = Application.Cols/2;
 			} else {
-				w = Application.Cols/2+Application.Cols%2;
+				Width = Application.Cols/2+Application.Cols%2;
 				x = Application.Cols/2;
 			}
 			
-			h = Application.Lines-4;
+			Height = Application.Lines-4;
 
-			Capacity = h - 2;
+			Capacity = Height - 2;
 		}
 		
 		public static Panel Create (Shell shell, string kind, int taken)
