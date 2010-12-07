@@ -127,8 +127,6 @@ namespace MouselessCommander {
 
 		void SetupGUI ()
 		{
-			var height = Application.Lines - 4;
-
 			left = Panel.Create (this, "left", 4);
 			right = Panel.Create (this, "right", 4);
 			bar = new ButtonBar (bar_labels);

@@ -229,7 +229,6 @@ namespace MouselessCommander {
 			} catch {
 				return new Listing ();
 			}
-			return null;
 		}
 	}
 	
