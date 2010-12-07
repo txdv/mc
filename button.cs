@@ -34,7 +34,7 @@ namespace MouselessCommander {
 
 				Curses.addstr ("{0,-6}", labels [i]);
 
-	        for (x = 2 + labels[i].Length; x < width; x++)
+	        for (int x = 2 + labels[i].Length; x < width; x++)
 				Curses.addch(' ');
 				
 			}
@@ -42,7 +42,7 @@ namespace MouselessCommander {
 
 		public override void DoSizeChanged ()
 		{
-			y = Application.Lines-1;
+			Y = Application.Lines-1;
 		}
 		
 		void Raise (int n)

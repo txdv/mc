@@ -394,7 +394,7 @@ namespace MouselessCommander {
 
 			is_selected = HasFocus && is_selected;
 				
-			Move (y + (nth-top) + 1, x + 1);
+			Move (Y + (nth-top) + 1, X + 1);
 			
 			Listing.FileNode node = listing [nth];
 			int color;
@@ -423,11 +423,11 @@ namespace MouselessCommander {
 		{
 			base.DoSizeChanged ();
 
-			if (x == 0) {
+			if (X == 0) {
 				Width = Application.Cols/2;
 			} else {
 				Width = Application.Cols/2+Application.Cols%2;
-				x = Application.Cols/2;
+				X = Application.Cols/2;
 			}
 			
 			Height = Application.Lines-4;
