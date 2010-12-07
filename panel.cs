@@ -189,9 +189,8 @@ namespace MouselessCommander {
 				var udi = new UnixDirectoryInfo (name);
 				dn.Nodes = PopulateNodes (true, udi.GetFileSystemEntries ());
 				dn.Expanded = true;
-			} catch (Exception e) {
-				Console.WriteLine ("Error loading {0}", name);
-				// Show error?
+			} catch {
+				// TODO: Show error
 				return;
 			}
 			Count = UpdateIndexes (nodes, 0, 0);
@@ -580,7 +579,6 @@ namespace MouselessCommander {
 
 				if (focus != null) {
 					int idx = listing.NodeWithName (focus);
-					Console.WriteLine ("Got: {0}", idx);
 					if (idx != -1) {
 						selected = idx;
 
