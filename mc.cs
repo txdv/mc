@@ -121,7 +121,9 @@ namespace MouselessCommander {
 		public override void DoSizeChanged ()
 		{
 			base.DoSizeChanged ();
-			entry.Y = Application.Lines-2;
+			
+			prompt.Y = Application.Lines - 2;
+			entry.Y = Application.Lines - 2;
 			entry.Width = Application.Cols - prompt.Text.Length;
 		}
 
