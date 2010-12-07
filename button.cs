@@ -23,15 +23,20 @@ namespace MouselessCommander {
 
 		public override void Redraw ()
 		{
-			int x = 0;
-			int y = Application.Lines-1;
-			Move (y, 0);
-			
+			Move (Application.Lines - 1, 0);
+      
+			int width = Application.Cols / 10;
+
 			for (int i = 0; i < labels.Length; i++){
 				Curses.attrset (Application.ColorBasic);
-				Curses.addstr (i == 0 ? "1" : String.Format (" {0}", i+1));
+				Curses.addstr (i == 9 ? "10" : String.Format (" {0}", i+1));
 				Curses.attrset (ColorFocus);
+
 				Curses.addstr ("{0,-6}", labels [i]);
+
+	        for (x = 2 + labels[i].Length; x < width; x++)
+				Curses.addch(' ');
+				
 			}
 		}
 
