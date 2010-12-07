@@ -9,3 +9,6 @@ mc.exe: $(SOURCES) Makefile
 
 run: mc.exe
 	mono --debug mc.exe ; stty sane
+
+clean:
+	rm -f *.exe *.mdb
