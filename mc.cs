@@ -84,12 +84,12 @@ namespace MouselessCommander {
 		
 		public override bool ProcessHotKey (int key)
 		{
-			if (entry.CursorPosition == 0){
-				if ((key == '>' || key == Curses.KeyRight) && CurrentPanel.CanExpandSelected){
+			if (entry.CursorPosition == 0) {
+				if ((key == '>' || key == Curses.KeyRight) && CurrentPanel.CanExpandSelected) {
 					CurrentPanel.ExpandSelected ();
 					return true;
 				}
-				if ((key == '<' || key == Curses.KeyLeft)){
+				if ((key == '<' || key == Curses.KeyLeft)) {
 					CurrentPanel.CollapseAction ();
 					return true;
 				}
@@ -141,8 +141,8 @@ namespace MouselessCommander {
 				CanFocus = false,
 			};
 			
-			bar.Action += delegate (int n){
-				switch (n){
+			bar.Action += delegate (int n) {
+				switch (n) {
 				case 5:
 					CurrentPanel.Copy (OtherPanel.CurrentPath);
 					break;

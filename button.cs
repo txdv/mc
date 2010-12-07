@@ -27,7 +27,7 @@ namespace MouselessCommander {
       
 			int width = Application.Cols / 10;
 
-			for (int i = 0; i < labels.Length; i++){
+			for (int i = 0; i < labels.Length; i++) {
 				Curses.attrset (Application.ColorBasic);
 				Curses.addstr (i == 9 ? "10" : String.Format (" {0}", i+1));
 				Curses.attrset (ColorFocus);
@@ -55,9 +55,9 @@ namespace MouselessCommander {
 		
 		public override bool ProcessHotKey (int key)
 		{
-			if (key >= Curses.KeyF1 && key <= Curses.KeyF10){
+			if (key >= Curses.KeyF1 && key <= Curses.KeyF10) {
 				Raise (key - Curses.KeyF1 + 1);
-			} else if (key >= (Curses.KeyAlt + '0') && (key <= (Curses.KeyAlt + '9'))){
+			} else if (key >= (Curses.KeyAlt + '0') && (key <= (Curses.KeyAlt + '9'))) {
 				var n = (key - Curses.KeyAlt - '0');
 				Raise (n == 0 ? n = 10 : n);
 			} else

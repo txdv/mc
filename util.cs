@@ -31,7 +31,7 @@ namespace MouselessCommander {
 
 			Result result = Result.Ignore;
 			Button b;
-			if ((flags & Result.Retry) == Result.Retry){
+			if ((flags & Result.Retry) == Result.Retry) {
 				b = new Button (0, 0, "Retry", true);
 				b.Clicked += delegate {
 					result = Result.Retry;
@@ -39,7 +39,7 @@ namespace MouselessCommander {
 				};
 				d.Add (b);
 			}
-			if ((flags & Result.Ignore) == Result.Ignore){
+			if ((flags & Result.Ignore) == Result.Ignore) {
 				b = new Button (0, 0, "Ignore", true);
 				b.Clicked += delegate {
 					result = Result.Ignore;
@@ -47,7 +47,7 @@ namespace MouselessCommander {
 				};
 				d.Add (b);
 			}
-			if ((flags & Result.Cancel) == Result.Cancel){
+			if ((flags & Result.Cancel) == Result.Cancel) {
 				b = new Button (0, 0, "Cancel", true);
 				b.Clicked += delegate {
 					result = Result.Cancel;

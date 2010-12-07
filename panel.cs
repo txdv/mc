@@ -81,7 +81,7 @@ namespace MouselessCommander {
 			if (nodes == null)
 				throw new ArgumentNullException ("nodes");
 
-			for (int i = 0; i < nodes.Length; i++){
+			for (int i = 0; i < nodes.Length; i++) {
 				if (nodes [i].StartIdx == idx)
 					return nodes [i];
 				if (i+1 == nodes.Length || nodes [i+1].StartIdx > idx)
@@ -92,7 +92,7 @@ namespace MouselessCommander {
 
 		string GetName (int idx, string start, FileNode [] nodes)
 		{
-			for (int i = 0; i < nodes.Length; i++){
+			for (int i = 0; i < nodes.Length; i++) {
 				if (nodes [i].StartIdx == idx)
 					return Path.Combine (start, nodes [i].Name);
 				if (i+1 == nodes.Length || nodes [i+1].StartIdx > idx)
@@ -103,7 +103,7 @@ namespace MouselessCommander {
 
 		string GetPathAt (int idx, FileNode [] nodes)
 		{
-			for (int i = 0; i < nodes.Length; i++){
+			for (int i = 0; i < nodes.Length; i++) {
 				if (nodes [i].StartIdx == idx)
 					return nodes [i].Name;
 				if (i+1 == nodes.Length || nodes [i+1].StartIdx > idx)
@@ -119,7 +119,7 @@ namespace MouselessCommander {
 
 		public int NodeWithName (string s)
 		{
-			for (int i = 0; i < nodes.Length; i++){
+			for (int i = 0; i < nodes.Length; i++) {
 				if (nodes [i].Name == s)
 					return i;
 			}
@@ -139,12 +139,12 @@ namespace MouselessCommander {
 			FileNode [] pnodes = new FileNode [root.Length + (need_dotdot ? 1 : 0)];
 			int i = 0;
 
-			if (need_dotdot){
+			if (need_dotdot) {
 				pnodes [0] = new DirNodeDotDot (new UnixDirectoryInfo (".."));
 				i++;
 			}
 			
-			foreach (var info in root){
+			foreach (var info in root) {
 				if (info.IsDirectory)
 					pnodes [i++] = new DirNode (info);
 				else
@@ -157,7 +157,7 @@ namespace MouselessCommander {
 
 		int UpdateIndexes (FileNode [] nodes, int start, int level)
 		{
-			foreach (var n in nodes){
+			foreach (var n in nodes) {
 				DirNode dn = n as DirNode;
 				n.StartIdx = start++;
 				n.Nested = level;
@@ -189,7 +189,7 @@ namespace MouselessCommander {
 				var udi = new UnixDirectoryInfo (name);
 				dn.Nodes = PopulateNodes (true, udi.GetFileSystemEntries ());
 				dn.Expanded = true;
-			} catch (Exception e){
+			} catch (Exception e) {
 				Console.WriteLine ("Error loading {0}", name);
 				// Show error?
 				return;
@@ -202,7 +202,7 @@ namespace MouselessCommander {
 			var node = this [idx] as DirNode;
 			if (node == null)
 				return;
-			if (node.Nodes == null){
+			if (node.Nodes == null) {
 				LoadChild (idx);
 			} else {
 				node.Expanded = true;
@@ -265,7 +265,7 @@ namespace MouselessCommander {
 		
 		int CompareNodes (Listing.FileNode a, Listing.FileNode b)
 		{
-			if (a.Name == ".."){
+			if (a.Name == "..") {
 				if (b.Name != "..")
 					return -1;
 				return 0;
@@ -278,18 +278,18 @@ namespace MouselessCommander {
 			if (sort_order == SortOrder.Unsorted)
 				return 0;
 			
-			if (group_dirs){
+			if (group_dirs) {
 				bool adir = a is Listing.DirNode;
 				bool bdir = b is Listing.DirNode;
 
-				if (adir ^ bdir){
+				if (adir ^ bdir) {
 					if (adir)
 						return -1;
 					return 1;
 				}
 			}
 
-			switch (sort_order){
+			switch (sort_order) {
 			case SortOrder.Name:
 				return string.Compare (a.Name, b.Name);
 				
@@ -365,7 +365,7 @@ namespace MouselessCommander {
 			Curses.attrset (ContainerColorNormal);
 			int files = listing.Count;
 			
-			for (int i = 0; i < Capacity; i++){
+			for (int i = 0; i < Capacity; i++) {
 				if (i + top >= files)
 					break;
 
@@ -402,7 +402,7 @@ namespace MouselessCommander {
 			if (node == null)
 				throw new Exception (String.Format ("Problem fetching item {0}", nth));
 
-			if (node.Info.IsDirectory){
+			if (node.Info.IsDirectory) {
 				color = is_selected ? ColorFocus : ColorDir;
 				ch = '/';
 			} else {
@@ -423,7 +423,7 @@ namespace MouselessCommander {
 		{
 			base.DoSizeChanged ();
 
-			if (x == 0){
+			if (x == 0) {
 				Width = Application.Cols/2;
 			} else {
 				Width = Application.Cols/2+Application.Cols%2;
@@ -439,7 +439,7 @@ namespace MouselessCommander {
 		{
 			var height = Application.Lines - taken;
 			
-			switch (kind){
+			switch (kind) {
 			case "left":
 				return new Panel (shell, Environment.CurrentDirectory, 0, 1, Application.Cols/2, height);
 					
@@ -456,7 +456,7 @@ namespace MouselessCommander {
 			
 			DrawItem (selected, false);
 			selected++;
-			if (selected-top >= Capacity){
+			if (selected-top >= Capacity) {
 				top += Capacity/2;
 				if (top > listing.Count - Capacity)
 					top = listing.Count - Capacity;
@@ -474,7 +474,7 @@ namespace MouselessCommander {
 			
 			DrawItem (selected, false);
 			selected--;
-			if (selected < top){
+			if (selected < top) {
 				top -= Capacity/2;
 				if (top < 0)
 					top = 0;
@@ -513,7 +513,7 @@ namespace MouselessCommander {
 		{
 			if (selected == 0)
 				return;
-			if (top == 0){
+			if (top == 0) {
 				DrawItem (selected, false);
 				selected = 0;
 				DrawItem (selected, true);
@@ -550,9 +550,9 @@ namespace MouselessCommander {
 			var dn = listing [selected] as Listing.DirNode;
 
 			// If it is a regular file, navigate to the directory
-			if (dn == null || dn.Expanded == false){
-				for (int i = selected-1; i >= 0; i--){
-					if (listing [i] is Listing.DirNode){
+			if (dn == null || dn.Expanded == false) {
+				for (int i = selected-1; i >= 0; i--) {
+					if (listing [i] is Listing.DirNode) {
 						selected = i;
 						if (selected < top)
 							top = selected;
@@ -574,18 +574,18 @@ namespace MouselessCommander {
 		{
 			var node = listing [selected];
 
-			if (node is Listing.DirNode){
+			if (node is Listing.DirNode) {
 				string focus = node is Listing.DirNodeDotDot ? Path.GetFileName (Title) : null;
 				SetCurrentPath (Path.Combine (CurrentPath, listing.GetPathAt (selected)), false);
 
-				if (focus != null){
+				if (focus != null) {
 					int idx = listing.NodeWithName (focus);
 					Console.WriteLine ("Got: {0}", idx);
-					if (idx != -1){
+					if (idx != -1) {
 						selected = idx;
 
 						// This could use some work to center on going up.
-						if (selected >= Capacity){
+						if (selected >= Capacity) {
 							top = selected;
 						}
 					}
@@ -608,7 +608,7 @@ namespace MouselessCommander {
 
 			public void Dispose ()
 			{
-				if (io_buffer != IntPtr.Zero){
+				if (io_buffer != IntPtr.Zero) {
 					Marshal.FreeHGlobal (io_buffer);
 					io_buffer = IntPtr.Zero;
 				}
@@ -616,8 +616,8 @@ namespace MouselessCommander {
 			
 			bool CopyDirectory (string source_absolute_path, string target_path, FilePermissions protection)
 			{
-				if (!dirs_created.Contains (target_path)){
-					while (true){
+				if (!dirs_created.Contains (target_path)) {
+					while (true) {
 						int r = Syscall.mkdir (target_path, protection | FilePermissions.S_IRWXU);
 						if (r != -1)
 							break;
@@ -630,7 +630,7 @@ namespace MouselessCommander {
 							break;
 						
 						var msg = UnixMarshal.GetErrorDescription  (errno);
-						switch (Error.Query (Error.Result.RetryIgnoreCancel, msg, "While creating \"{0}\"", target_path)){
+						switch (Error.Query (Error.Result.RetryIgnoreCancel, msg, "While creating \"{0}\"", target_path)) {
 						case Error.Result.Retry:
 							continue;
 						case Error.Result.Ignore:
@@ -643,7 +643,7 @@ namespace MouselessCommander {
 				}
 				
 				var udi = new UnixDirectoryInfo (source_absolute_path);
-				foreach (var entry in udi.GetFileSystemEntries ()){
+				foreach (var entry in udi.GetFileSystemEntries ()) {
 					if (entry.Name == "." || entry.Name == "..")
 						continue;
 
@@ -663,7 +663,7 @@ namespace MouselessCommander {
 			{
 				// Open Source
 				int source_fd;
-				while (true){
+				while (true) {
 					source_fd = Syscall.open (source_absolute_path, OpenFlags.O_RDONLY, (FilePermissions) 0);
 					if (source_fd != -1)
 						break;
@@ -672,7 +672,7 @@ namespace MouselessCommander {
 						continue;
 				
 					var msg = UnixMarshal.GetErrorDescription  (errno);
-					switch (Error.Query (Error.Result.RetryCancel, msg, "While opening \"{0}\"", target_path)){
+					switch (Error.Query (Error.Result.RetryCancel, msg, "While opening \"{0}\"", target_path)) {
 					case Error.Result.Retry:
 						continue;
 					case Error.Result.Cancel:
@@ -684,7 +684,7 @@ namespace MouselessCommander {
 				bool ret = false;
 				// Open target
 				int target_fd;
-				while (true){
+				while (true) {
 					target_fd = Syscall.open (target_path, OpenFlags.O_WRONLY, FilePermissions.S_IWUSR);
 					if (target_fd != -1)
 						break;
@@ -693,7 +693,7 @@ namespace MouselessCommander {
 						continue;
 				
 					var msg = UnixMarshal.GetErrorDescription  (errno);
-					switch (Error.Query (Error.Result.RetryCancel, msg, "While creating \"{0}\"", source_absolute_path)){
+					switch (Error.Query (Error.Result.RetryCancel, msg, "While creating \"{0}\"", source_absolute_path)) {
 					case Error.Result.Retry:
 						continue;
 					case Error.Result.Cancel:
@@ -706,7 +706,7 @@ namespace MouselessCommander {
 
 				long n;
 				
-				while (true){
+				while (true) {
 					n = Syscall.read (source_fd, io_buffer, COPY_BUFFER_SIZE);
 
 					if (n != -1)
@@ -717,14 +717,14 @@ namespace MouselessCommander {
 						continue;
 				
 					var msg = UnixMarshal.GetErrorDescription  (errno);
-					switch (Error.Query (Error.Result.RetryCancel, msg, "While reading \"{0}\"", source_absolute_path)){
+					switch (Error.Query (Error.Result.RetryCancel, msg, "While reading \"{0}\"", source_absolute_path)) {
 					case Error.Result.Retry:
 						continue;
 					case Error.Result.Cancel:
 						goto close_both;
 					}
 				}
-				while (true){
+				while (true) {
 					long count = Syscall.write (target_fd, io_buffer, (ulong) n);
 					if (count != -1)
 						break;
@@ -787,8 +787,8 @@ namespace MouselessCommander {
 				return;
 
 			var progress = new Progress ("Copying", marked > 0 ? marked : 1);
-			using (var ctx = new CopyOperation (progress)){
-				foreach (var f in listing){
+			using (var ctx = new CopyOperation (progress)) {
+				foreach (var f in listing) {
 					if (!f.Marked)
 						continue;
 					
@@ -800,7 +800,7 @@ namespace MouselessCommander {
 		
 		public override bool ProcessKey (int key)
 		{
-			switch (key){
+			switch (key) {
 			case Curses.KeyUp:
 			case 16: // Control-p
 				return MoveUp ();
